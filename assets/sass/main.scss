@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  // 62.5% <=> 10px
+  font-size: 62.5%;
+  line-height: 1.4;
+  font-family: "Lato", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 1.6rem;
+  overflow: hidden;
+}
+
+a {
+  &,
+  &:active,
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+@mixin dflex($alignItems: center, $justifyContent: center) {
+  display: flex;
+  align-items: $alignItems;
+  justify-content: $justifyContent;
+}
+
+.container {
+  @include dflex;
+  gap: 2rem;
+  height: 100vh;
+
+  background-color: #dfdfdf;
+
+  button {
+    padding: 2rem;
+
+    border: none;
+    border-radius: 2rem;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+  }
+
+  .success {
+    background-color: green;
+  }
+
+  .warn {
+    background-color: yellow;
+    color: black;
+  }
+
+  .err {
+    background-color: red;
+  }
+
+  .noti {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+
+    &-items {
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+
+      border-radius: 2rem 0 2rem 2rem;
+
+      text-align: center;
+      color: white;
+      overflow: hidden;
+
+      position: relative;
+
+      animation: move 6.5s ease-in-out alternate;
+
+      position: relative;
+      left: 25rem;
+
+      .border {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background-color: white;
+        border-radius: 2rem;
+
+        animation: progress 5s linear alternate;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+
+        border-radius: 20%;
+        width: 0.7rem;
+        height: 100%;
+      }
+    }
+
+    .win {
+      background-color: #6eeb6e98;
+      position: relative;
+      .border {
+        background-color: #0ef50e;
+      }
+      &::before {
+        background-color: #0ef50e;
+      }
+    }
+
+    .confuse {
+      background-color: #ffae0091;
+      .border {
+        background-color: #f1f50e;
+      }
+      &::before {
+        background-color: #f1f50e;
+      }
+    }
+
+    .lose {
+      background-color: #b321217e;
+      .border {
+        background-color: #f31f18;
+      }
+      &::before {
+        background-color: #f31f18;
+      }
+    }
+
+    .remove {
+      display: none;
+    }
+  }
+}
+
+@keyframes move {
+  0% {
+    left: 24rem;
+  }
+
+  15%,
+  70% {
+    left: 0;
+  }
+
+  80% {
+    left: 24rem;
+  }
+}
+
+@keyframes progress {
+  from {
+    right: 100%;
+  }
+
+  to {
+    right: 0%;
+  }
+}
